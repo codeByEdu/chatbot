@@ -1,14 +1,14 @@
-import { Message } from "./message";
+import { AiMessage } from "./ai-message";
 
 export type ChoicesProps = {
     index: number;
-    message: Message;
+    message: AiMessage;
     finishReason: string;
 }
 
 export class Choices {
     readonly index: number;
-    readonly message: Message;
+    readonly message: AiMessage;
     readonly finishReason: string;
 
     private constructor(props: ChoicesProps) {
