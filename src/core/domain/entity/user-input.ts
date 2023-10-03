@@ -1,11 +1,9 @@
 export type UserInputProps = {
-    role: string;
-    content: string;
+    message: string;
 }
 
 export class UserInput {
-    readonly role: string;
-    readonly content: string;
+    readonly message: string;
 
     private constructor(props: UserInputProps) {
         Object.assign(this, props);
