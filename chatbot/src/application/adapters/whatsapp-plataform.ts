@@ -6,9 +6,9 @@ import { ChatUser } from '../../core/domain/entity/chat-user';
 
 
 export class WhatsAppChatPlataform implements ChatPlataform {
-    async sendMessage(messageInput: ChatMessageInput): Promise<ChatUserOutput>{
     
+    async receiveChatMessage(message: ChatMessageInput): Promise<ChatUserOutput>{
 
-
+        return chatUserOutput;
     }
 }
