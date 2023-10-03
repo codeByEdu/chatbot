@@ -18,8 +18,7 @@ namespace Vagas
         {
             Console.WriteLine("Log: Start Connection");
 
-            //string configDB = Environment.GetEnvironmentVariable("DB_CONN");
-            string configDB = "Server=aws-us-east-2.connect.psdb.cloud;Database=hackathon;user=hflzfr8eh0pcntx8zu7r;password=pscale_pw_qZmyuPsMWsQbMnGbdJj2xXmrCc3gTJDXR4THyZ2XPao;SslMode=VerifyFull";
+            string configDB = Environment.GetEnvironmentVariable("DB_CONNECTION");
 
             using (var _connection = new MySqlConnection(configDB))
             {
