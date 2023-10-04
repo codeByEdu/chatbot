@@ -6,9 +6,22 @@ import { ChatUser } from '../../core/domain/entity/chat-user';
 
 
 export class WhatsAppChatPlataform implements ChatPlataform {
-    
-    async receiveChatMessage(message: ChatMessageInput): Promise<ChatUserOutput>{
+    private client = Client();
 
-        return chatUserOutput;
+    async receiveChatMessage(): Promise<ChatMessageInput>{
+        this.client = new Client();
+        this.client.on('message', async (message: Message) => {
+            const messageText = message.body;
+            const userTel = message.from;
+
+            const chatMessageProps ={
+                message: messageText,
+                chatUser: userTel
+            }
+            const chatUserInput =  ChatMessageInput.create(chatMessageProps);
+    
+            return chatUserInput;
+        });
     }
+
 }
