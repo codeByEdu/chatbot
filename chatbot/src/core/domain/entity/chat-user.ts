@@ -1,11 +1,11 @@
 export type ChatUserProps = {
+    chat: any;
     userId: string;
-    userTelNumber: string;
 }
 
 export class ChatUser {
+    readonly chat: any;
     readonly userId: string;
-    readonly userTelNumber: string;
 
     private constructor(props: ChatUserProps) {
         Object.assign(this, props);

@@ -1,9 +1,15 @@
 import axios from "axios";
 import { AiRequest } from "../../core/domain/entity/ai-request";
 import { AiResponse, AiResponseProps } from "../../core/domain/entity/ai-response";
-import { AiPlataform } from "../../core/domain/ports/ai-plataform";
+import { AiPlataform } from "../../core/domain/use-cases/ai-plataform";
 
 export class OpenAiPlataform implements AiPlataform {
+
+    private model: string;
+
+    constructor() {
+        this.model = process.env.OPENAI_MODEL;
+    }
 
     async sendPrompt(request: AiRequest): Promise<AiResponse> {
         const aiMessagesMapeado = request.requestMessages.map((aiMessage) => {
@@ -13,11 +19,11 @@ export class OpenAiPlataform implements AiPlataform {
             }
         })
         const body = {
-            model: request.model,
+            model: this.model,
             messages: aiMessagesMapeado
         }
         const headers = {
-            Authorization: "Bearer -=-=--=-"
+            Authorization: `Bearer ${process.env.OPEN_AI_API_KEY}`,
         }
         const { data } = await axios.post("https://api.openai.com/v1/chat/completions", body, {
             headers

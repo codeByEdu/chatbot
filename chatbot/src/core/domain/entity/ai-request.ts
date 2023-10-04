@@ -1,12 +1,10 @@
 import { AiMessage } from "./ai-message";
 
 export type AiRequestProps = {
-    model: string;
-    requestMessages: AiMessage;
+    requestMessages: AiMessage[];
 }
 
 export class AiRequest {
-    readonly model: string;
     readonly requestMessages: AiMessage[]
 
     private constructor(props: AiRequestProps) {
