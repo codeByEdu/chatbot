@@ -1,10 +1,10 @@
 import openai
   
-api_key = "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"
+api_key = "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"
 
 openai.api_key = api_key
 
-with open("dataset.jsonl", encoding="utf-8") as file:
+with open("fine-tuning\interview-data.jsonl", encoding="utf-8") as file:
   response = openai.File.create(
     file=file,
     purpose='fine-tune'
@@ -15,7 +15,7 @@ print(f"ID: {file_id}")
 
 #Usando o File ID
 file_id =  file_id
-model_name = "ft:gpt-3.5-turbo-0613:personal::85Rh26i6" #Fine-Tuned model
+model_name = "gpt-3.5-turbo"
 
 response = openai.FineTuningJob.create(
   training_file=file_id,
