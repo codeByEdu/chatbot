@@ -13,13 +13,6 @@ export class WhatsAppChatPlataform implements ChatPlataform {
     public client: Client;
     public cacheChatUser: { userId: string, message: string, aiResponse: string }[] = [];
 
-    // {
-    //     userId: "bia",
-    //     message: "posso arrumar um estagio?",
-    //     when: "2021-07-28T21:00:00",
-    //     aiResponse: "não sei"            
-    // }
-
     constructor(private readonly aiPlataform: AiPlataform) { }
 
     async initClient(): Promise<void> {
@@ -56,22 +49,6 @@ export class WhatsAppChatPlataform implements ChatPlataform {
             }
             const chatUserInput = ChatMessageInput.create(chatMessageProps);
 
-            // const chatUserCountCache = this.cacheChatUser.filter((cache) => {
-            //     return cache.userId == chatUser.userId;
-            // }).length
-
-            // if (chatUserCountCache > 20) {
-            //     this.cacheChatUser = this.cacheChatUser.filter((cache) => cache.userId != chatUser.userId)
-            // }
-
-            // if (chatUserCountCache == 0) {
-            //     this.cacheChatUser.push({
-            //         userId: chatUser.userId,
-            //         message: chatMessageProps.message,
-            //         aiResponse: ""
-            //     })
-            // }
-
             await this.receiveChatMessage(chatUserInput);
         });
     }
@@ -94,43 +71,27 @@ export class WhatsAppChatPlataform implements ChatPlataform {
         const modelDuvidasEstagio = process.env.OPEN_AI_MODEL_DUVIDAS_ESTAGIO;
         const modelSimuladorEntrevista = process.env.OPEN_AI_MODEL_SIMULADOR_ENTREVISTA;
 
-        // let chatContext: AiMessage[] = [];
-
-        // if (this.cacheChatUser.length > 0) {
-        //     this.cacheChatUser.forEach((cache) => {
-        //         if (cache.userId == chatUser.userId && cache.aiResponse) {
-        //             const aiMessageSystem = AiMessage.create({
-        //                 message: cache.aiResponse ?? "",
-        //                 role: "system"
-        //             })
-        //             const aiMessageUser = AiMessage.create({
-        //                 message: "contexto da conversa: " + cache.message ?? "",
-        //                 role: "system"
-        //             })
-        //             chatContext.push(aiMessageUser)
-        //             chatContext.push(aiMessageSystem)
-        //         }
-        //     });
-        // }
-
-        // console.log(this.cacheChatUser)
-
         if (aiMessage.message.includes("[DUVIDAS_ESTAGIO]")) {
-            const aiMessageSystem = AiMessage.create({
-                message: "Você é um chatbot da Universidade Mackenzie que responde dúvidas relacionadas à estágios da Universidade Mackenzie, com os dados que você possui dos regulamentos da Universidade Mackenzie",
-                role: "system"
-            })
+            const context: AiMessage[] = [
+                AiMessage.create({
+                    message: "Você é um chatbot da Universidade Mackenzie que responde dúvidas relacionadas à estágios da Universidade Mackenzie, com os dados que você possui dos regulamentos da Universidade Mackenzie",
+                    role: "system"
+                })
+            ]
             aiRequest = AiRequest.create({
-                requestMessages: [aiMessageSystem, aiMessage]
+                requestMessages: [...context, aiMessage]
             })
             aiResponse = await this.aiPlataform.sendPrompt(aiRequest, modelDuvidasEstagio);
         } else {
-            const aiMessageUserContext: AiMessage = AiMessage.create({
-                message: 'Simule um entrevistador de emprego e analise a resposta do usuario, fazendo outra pergunta na sequencia. Enviando: ANALISE DA RESPOSTA e PERGUNTA',
-                role: 'system'
-            })
+            const context: AiMessage[] = [
+                AiMessage.create({ "role": "system", "message": "Simule um entrevistador de emprego e analise a resposta do usuário, fornecendo um feedback construtivo, e faça outra pergunta na sequência" }),
+                AiMessage.create({ "role": "user", "message": "Quero me preparar para todos os cenários possíveis" }),
+                AiMessage.create({ "role": "assistant", "message": "PERGUNTA: Há alguma situação em que você sentiu que falhou e como lidou com isso?" }),
+                AiMessage.create({ "role": "user", "message": "Sim, em um projeto que não atendeu às expectativas do cliente. Refleti sobre os erros, obtive feedback e ajustei minha abordagem para projetos futuros" }),
+                AiMessage.create({ "role": "assistant", "message": "FEEDBACK: Reconhecer falhas e se adaptar com base nelas é uma habilidade valiosa. Aprofundar-se em como essas mudanças impactaram positivamente os projetos subsequentes pode fortalecer sua resposta.\n PERGUNTA: Como você define e avalia o sucesso em seu trabalho?" })
+            ]
             aiRequest = AiRequest.create({
-                requestMessages: [aiMessageUserContext, aiMessage]
+                requestMessages: [...context, aiMessage]
             })
             aiResponse = await this.aiPlataform.sendPrompt(aiRequest, modelSimuladorEntrevista);
         }
