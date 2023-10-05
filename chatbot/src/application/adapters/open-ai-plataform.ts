@@ -5,13 +5,10 @@ import { AiPlataform } from "../../core/domain/use-cases/ai-plataform";
 
 export class OpenAiPlataform implements AiPlataform {
 
-    private model: string;
-
     constructor() {
-        this.model = process.env.OPENAI_MODEL;
     }
 
-    async sendPrompt(request: AiRequest): Promise<AiResponse> {
+    async sendPrompt(request: AiRequest, model?: string): Promise<AiResponse> {
         const aiMessagesMapeado = request.requestMessages.map((aiMessage) => {
             return {
                 role: aiMessage.role,
@@ -19,7 +16,7 @@ export class OpenAiPlataform implements AiPlataform {
             }
         })
         const body = {
-            model: this.model,
+            model: model ? model : process.env.OPENAI_MODEL,
             messages: aiMessagesMapeado
         }
         const headers = {
