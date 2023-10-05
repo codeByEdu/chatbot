@@ -16,6 +16,7 @@ export class AiResponse {
     readonly model: string;
     readonly choices: Choices;
     readonly usage: Usage;
+    
     private constructor(props: AiResponseProps) {
         Object.assign(this, props);
     }
