@@ -1,4 +1,5 @@
 # MackBot
+![image](https://github.com/codeByEdu/chatbot/assets/64917167/21d7d595-d20a-46ec-9f0d-9ac0c113bb4b)
 
 ## Introdução
 
@@ -34,4 +35,5 @@ Além do valor investido no treinamento, o custo por pergunta respondida, sai em
 ## Funcionalidades da aplicação
 
 * **ChatBot - Resposta a Dúvidas:** O MackBot é um chatbot baseado em Generative que revoluciona a forma como os alunos interagem, permitindo comunicações naturais, sem a necessidade de aderir a menus predefinidos. Com o MackBot, os alunos têm a liberdade de expressar suas perguntas de maneira espontânea e intuitiva, proporcionando uma experiência de consulta de regulamentos que é genuinamente inclusiva e acolhedora.
+
 * **Simulação de Entrevistas de Estágio com Feedback:** Os alunos podem usar o chatbot para simular entrevistas de estágio, onde o MackBot atua como um entrevistador virtual. Após a simulação, o MackBot fornece feedback detalhado sobre os pontos fortes e áreas de melhoria do aluno. Isso não apenas ajuda os alunos a se prepararem para entrevistas reais, mas também oferece orientações valiosas para seu desenvolvimento profissional.
