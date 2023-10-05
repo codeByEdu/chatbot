@@ -17,6 +17,14 @@ export class WhatsAppChatPlataform implements ChatPlataform {
 
     async initClient(): Promise<void> {
         this.client.initialize();
+
+        this.client.on('qr', (qrCode) => {
+            qrcode.generate(qrCode, { small: true });
+        });
+
+        this.client.on('ready', () => {
+            console.log('Bot inicializado!');
+        });
     }
 
     async createClient(): Promise<void> {
@@ -28,14 +36,6 @@ export class WhatsAppChatPlataform implements ChatPlataform {
     }
 
     async startListening(): Promise<void> {
-        this.client.on('qr', (qrCode) => {
-            qrcode.generate(qrCode, { small: true });
-        });
-
-        this.client.on('ready', () => {
-            console.log('Bot inicializado!');
-        });
-
         this.client.on('message', async (receivedMessage: Message) => {
             const message = receivedMessage.body;
             const chat = await receivedMessage.getChat();
