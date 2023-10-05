@@ -38,7 +38,7 @@ Além do valor investido no treinamento, o custo por pergunta respondida, sai em
 * **Simulação de Entrevistas de Estágio com Feedback:** Os alunos podem usar o chatbot para simular entrevistas de estágio, onde o MackBot atua como um entrevistador virtual. Após a simulação, o MackBot fornece feedback detalhado sobre os pontos fortes e áreas de melhoria do aluno. Isso não apenas ajuda os alunos a se prepararem para entrevistas reais, mas também oferece orientações valiosas para seu desenvolvimento profissional.
   
 ## Atual fluxo de conversação com o MackBot
-![fluxo-mackbot drawio](https://github.com/codeByEdu/chatbot/assets/64917167/3d23466e-790b-495f-a31a-38251e34714c)
+* ![fluxo-mackbot drawio](https://github.com/codeByEdu/chatbot/assets/64917167/3d23466e-790b-495f-a31a-38251e34714c)
 
 ## Faça o teste, entre em contato!
-![image](https://github.com/codeByEdu/chatbot/assets/64917167/21d7d595-d20a-46ec-9f0d-9ac0c113bb4b)
+* ![image](https://github.com/codeByEdu/chatbot/assets/64917167/21d7d595-d20a-46ec-9f0d-9ac0c113bb4b)
